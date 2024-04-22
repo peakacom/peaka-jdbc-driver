@@ -37,7 +37,7 @@ public class NonRegisteringPeakaDriver implements Driver {
 
     @Override
     public int getMajorVersion() {
-        return 0;
+        return 1;
     }
 
     @Override
