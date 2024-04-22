@@ -55,3 +55,9 @@ provide your API Key with `extraCredentials` property. You can find a sample cod
         throw new RuntimeException(e);
     }
 ```
+
+## Contact
+
+For feature requests and bugs, please create an issue in this repo. For further support, see the following resources:
+
+- [Peaka Community Discord](https://discord.com/invite/peaka)
