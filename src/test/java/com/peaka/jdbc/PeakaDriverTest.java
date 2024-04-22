@@ -14,7 +14,7 @@ public class PeakaDriverTest {
     private static final String QUERY = "SELECT SUM(\"amount\") AS total_amount\n" +
             "FROM \"stripe\".\"payment\".\"charges\"";
     //Follow instructions on how to create your api key: https://docs.peaka.com/how-to-guides/how-to-generate-api-keys
-    //Connect sample data sets to then run the query above with sample data by running testQueryWithSampleData.
+    //Connect sample data sets to Peaka then run the query above with sample data by running testQueryWithSampleData.
     private static final String PEAKA_API_KEY = "<Your API KEY>";
 
     @Test
