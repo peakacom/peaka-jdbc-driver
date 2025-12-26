@@ -31,3 +31,4 @@ replay_pid*
 /.gradle
 /target
 /build/
+/dependency-reduced-pom.xml

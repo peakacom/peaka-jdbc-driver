@@ -17,7 +17,7 @@ public class PeakaDriverTest {
     //Connect sample data sets to Peaka then run the query above with sample data by running testQueryWithSampleData.
     private static final String PEAKA_API_KEY = "<Your API KEY>";
 
-    @Test
+    //@Test
     public void testQueryWithSampleData() {
         try {
             Class.forName("com.peaka.jdbc.PeakaDriver");
