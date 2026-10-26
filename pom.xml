@@ -6,7 +6,7 @@
 
   <groupId>com.peaka</groupId>
   <artifactId>peaka-jdbc</artifactId>
-  <version>1.1.0</version>
+  <version>1.2.0</version>
 
   <name>peaka-jdbc</name>
   <description>Peaka JDBC Driver</description>
