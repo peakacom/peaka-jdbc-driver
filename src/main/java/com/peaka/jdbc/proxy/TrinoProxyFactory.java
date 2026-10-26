@@ -1,6 +1,7 @@
 package com.peaka.jdbc.proxy;
 
 import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import java.sql.Connection;
@@ -10,6 +11,19 @@ import java.time.OffsetDateTime;
 import java.time.ZonedDateTime;
 
 public class TrinoProxyFactory {
+
+    /**
+     * Calls the wrapped driver and lets its own exception through. Reflection wraps it in an
+     * InvocationTargetException, which a proxy can only rethrow as UndeclaredThrowableException:
+     * a tool waiting for an SQLException would see neither the error nor Trino's message.
+     */
+    private static Object invokeOriginal(Method method, Object original, Object[] args) throws Throwable {
+        try {
+            return method.invoke(original, args);
+        } catch (InvocationTargetException e) {
+            throw e.getCause();
+        }
+    }
 
     /**
      * Entry point: Wraps the original Trino Connection.
@@ -30,7 +44,7 @@ public class TrinoProxyFactory {
 
         @Override
         public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-            Object result = method.invoke(original, args);
+            Object result = invokeOriginal(method, original, args);
             
             // If the result is a Statement (including PreparedStatement), wrap it
             if (result instanceof Statement) {
@@ -62,7 +76,7 @@ public class TrinoProxyFactory {
 
         @Override
         public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-            Object result = method.invoke(original, args);
+            Object result = invokeOriginal(method, original, args);
 
             // If the method returns a ResultSet (e.g., executeQuery), wrap it
             if (result instanceof ResultSet) {
@@ -114,7 +128,7 @@ public class TrinoProxyFactory {
             }
 
             // For all other methods (next, getString, close, etc.), delegate to the original driver
-            return method.invoke(original, args);
+            return invokeOriginal(method, original, args);
         }
     }
 }
