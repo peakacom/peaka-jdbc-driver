@@ -60,11 +60,11 @@
         <plugin>
           <groupId>org.sonatype.central</groupId>
           <artifactId>central-publishing-maven-plugin</artifactId>
-          <version>0.4.0</version>
+          <!-- 0.4.0 failed while waiting for a deployment: it could not read the Portal's "warnings" field -->
+          <version>0.12.0</version>
           <extensions>true</extensions>
           <configuration>
             <publishingServerId>central</publishingServerId>
-            <tokenAuth>true</tokenAuth>
             <checksums>all</checksums>
           </configuration>
         </plugin>
